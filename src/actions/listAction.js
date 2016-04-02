@@ -7,14 +7,14 @@ function add (item) {
     }
 }
 
-function del (item) {
+function del (index) {
     return {
         type: LISTDEL,
-        item: item
+        index: index
     }
 }
 
-function empty (item) {
+function empty () {
     return {
         type: LISTEMPTY
     }
