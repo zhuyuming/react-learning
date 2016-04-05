@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --history-api-fallback  --open"
+    "start": "node server.js",
+    "build": "webpack webpack.config.base.js"
   },
   "author": "",
   "license": "ISC",

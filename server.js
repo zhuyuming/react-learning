@@ -1,12 +1,31 @@
 var webpack = require('webpack')
-var Server = require('webpack-dev-server')
-var config  = require('./webpack.config.js')
+var webpackDevServer = require('webpack-dev-server')
+var config  = require('./webpack.config.server.js')
 
-new Server(webpack(config), {
+var server = new webpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
-  historyApiFallback: true,
+  // historyApiFallback: true,
   hot: true,
-}).listen(3000, 'localhost', function (err, result) {
+})
+
+server.listen(8080, '127.0.0.1', function (err, result) {
   if (err) console.log(err);
   console.log('Listening at localhost:3000');
 });
+
+
+// 模拟数据调试
+var app = server.app
+var fs  = require('fs')
+app.post('*',function  (req,res) {
+	var url = req.url;
+	if( /.json$/.test(url)){
+		try{
+			path = './data/' + url.substr(1)
+			var data = fs.readFileSync(path, 'utf-8')
+		}catch(err){
+			var data = JSON.stringify( { code: 0, msg:'路径错误或者json文件不存在'} )
+		}
+	}
+	res.end(data)
+})

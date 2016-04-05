@@ -26,11 +26,13 @@ export default class Login extends Component{
 
         that.setState({ loading:true })
         ajax({
-            url:'./data/login.json',
+            url:'./data/loginerror.json',
             data: parm, success:function (data) {
                 that.setState({ loading:false })
                 if( data.code === 1 ){
-                    that.setState( { msg:'登陆成功', type:'success'} )
+                    that.setState( { msg:data.msg, type:'success'} )
+                }else if( data.code === 0 ){
+                    that.setState( { msg:data.msg, type:'error'} )
                 }
             }
         })
