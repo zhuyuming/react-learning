@@ -4,7 +4,7 @@ import ajax from 'reqwest'
 export default class Login extends Component{
     constructor(props){
         super(props)
-        this.state = { view: 1, login:true, msg:false, type:'', loading: false}
+        this.state = { view: 1,  msg:false, type:'', loading: false}
     }
     submit(e){
         e.preventDefault()
@@ -26,7 +26,7 @@ export default class Login extends Component{
 
         that.setState({ loading:true })
         ajax({
-            url:'./data/loginerror.json',
+            url:'./data/login.json',
             data: parm, success:function (data) {
                 that.setState({ loading:false })
                 if( data.code === 1 ){
@@ -36,7 +36,6 @@ export default class Login extends Component{
                 }
             }
         })
-
     }
     lockform(){
 

@@ -1,10 +1,10 @@
 var webpack = require('webpack')
 var webpackDevServer = require('webpack-dev-server')
-var config  = require('./webpack.config.server.js')
+var config  = require('./build/webpack.config.server.js')
 
 var server = new webpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
-  // historyApiFallback: true,
+  historyApiFallback: true,
   hot: true,
 })
 
@@ -18,6 +18,7 @@ server.listen(8080, '127.0.0.1', function (err, result) {
 var app = server.app
 var fs  = require('fs')
 app.post('*',function  (req,res) {
+    console.log('psot -> json')
 	var url = req.url;
 	if( /.json$/.test(url)){
 		try{
@@ -26,6 +27,8 @@ app.post('*',function  (req,res) {
 		}catch(err){
 			var data = JSON.stringify( { code: 0, msg:'路径错误或者json文件不存在'} )
 		}
-	}
-	res.end(data)
+	   res.end(data)
+    }else{
+        // xuanranzhuye
+    }
 })
