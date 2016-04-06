@@ -10,7 +10,7 @@ var server = new webpackDevServer(webpack(config), {
 
 server.listen(8080, '127.0.0.1', function (err, result) {
   if (err) console.log(err);
-  console.log('Listening at localhost:3000');
+  console.log('Listening at default config');
 });
 
 
