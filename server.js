@@ -13,7 +13,6 @@ server.listen(8080, '127.0.0.1', function (err, result) {
   console.log('Listening at default config');
 });
 
-
 // 模拟数据调试
 var app = server.app
 var fs  = require('fs')

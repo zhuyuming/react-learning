@@ -1,7 +1,7 @@
 // -------------common-------------------------
 
     // Redux
-    import { createStore, applyMiddleware } from 'redux'
+    import { createStore, applyMiddleware, compose } from 'redux'
 
     // Router
     import { useRouterHistory } from 'react-router'
@@ -20,18 +20,22 @@ import reducers from '../reducer'
 
 const browserHistory = useRouterHistory(createBrowserHistory)({ basename:'' });
 
-const createMiddleStore = applyMiddleware(thunk,routerMiddleware(browserHistory))(createStore);
+if( process.env.NODE_ENV === 'dev'){
+    var instrument = require('../devtools.js').instrument
+
+    var createMiddleStore = compose(
+        applyMiddleware(thunk,routerMiddleware(browserHistory)),
+        instrument(),
+    )(createStore);
+}else{
+    var createMiddleStore = compose(
+        applyMiddleware(thunk,routerMiddleware(browserHistory))
+    )(createStore);
+}
 
 export const store =  createMiddleStore(reducers);
 
 export const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.routerReducer
 });
-
-
-
-
-
-
-
 
