@@ -39,7 +39,6 @@ module.exports = {
     ],
     resolve:{
          extensions:['', '.js', 'ejs']
-    },
+    }
 
-    watch: true
 }

@@ -11,7 +11,7 @@ var env = new webpack.DefinePlugin({
 })
 config.plugins.push(env)
 config.plugins.push(new webpack.HotModuleReplacementPlugin())
-
+config.watch = true
 
 module.exports =  config
 
