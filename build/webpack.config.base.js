@@ -3,7 +3,7 @@ var htmlTpl = require('html-webpack-plugin')
 var path = require('path')
 
 var packages = require('../package.json').dependencies
-var vendor = Object.keys(packages)
+var common = Object.keys(packages)
 
 var basePath = path.resolve(__dirname, '../')
 var publicPath = '/'
@@ -12,12 +12,12 @@ module.exports = {
         main: [
             path.resolve(basePath, 'src/main.js')
         ],
-        common: vendor
+        common: common
     },
     output:{
         path:path.resolve(basePath, 'dist/'),
         publicPath: publicPath,
-        filename:'[name].min.js'
+        filename:'js/[name].min.js'
     },
     module:{
         loaders:[
@@ -30,7 +30,7 @@ module.exports = {
     },
 
     plugins:[
-        new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
+        new webpack.optimize.CommonsChunkPlugin('common', 'js/common.min.js'),
         new htmlTpl({
             title: 'react-learing',
             template:path.resolve(basePath, 'src/index.ejs'),

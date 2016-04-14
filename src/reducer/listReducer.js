@@ -8,7 +8,10 @@ export default function ( state = init, action){
             return [...state, action.item];
             break;
         case LISTDEL :
-            return ['del'];
+            return [
+                ...state.slice( 0, action.index ),
+                ...state.slice(action.index + 1)
+            ];
             break;
         case LISTEMPTY :
             return [];

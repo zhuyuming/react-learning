@@ -30,13 +30,19 @@ const list = connectComponent(List)
 
 function createRoot () {
 	let ele=[]
-	let rootRouter = <div key='router'><Router history={ history }>
-	    <Route path='/' component={ app }>
+
+	let Routes = <Route path='/' component={ app }>
 	        <IndexRoute component={ home }></IndexRoute>
 	        <Route path="/login" component={ login }></Route>
 	        <Route path="/ucenter" component={ ucenter }></Route>
 	        <Route path="/list" component={ list }></Route>
 	    </Route>
+
+	console.log(Routes)
+	console.log('c:' + Routes.children)
+
+	let rootRouter = <div key='router'><Router history={ history }>
+	    { Routes }
 	</Router>
 	</div>
 	ele.push(rootRouter)
